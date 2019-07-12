@@ -1,0 +1,92 @@
+{
+  "translations": {
+    "age": { "label": "Años" },
+    "home":  "Casa" ,
+    "name": { "label": "Nombre" },
+    "search": "Buscar",
+    "Email address": "Email",
+    "Password": "Password",
+    "Submit": "Login",
+    "Users": "Users ES",
+    "Customers": "Customers ES",
+    "Index2": "index2",
+    "validator": {
+      "required": "このフィールドが必要です。",
+      "email": "電子メールフィールドは必須です。",
+      "min": "名前は6文字以上にする必要があります。" 
+    },
+    "login": {
+      "submit": "ログイン",
+      "login": "ログアウト",
+      "Email": "電子メール",
+      "Password": "パスワード",
+      "invalid_email_or_password": "無効なメールアドレスまたはパスワード"
+    },
+    "menu": {
+      "ranking": "ランキング",
+      "reception_amount": "受信量",
+      "number_receptions": "受信回数",
+      "price": "価値",
+      "transmission_amount": "送信量",
+      "number_transmissions": "送信回数",
+      "charts": "チャート",
+      "chart": "推移",
+      "diagram": "ダイヤグラム",
+      "user": "ユーザ管理",
+      "list": "一覧",
+      "registration": "登録",
+      "logout": "ログアウト"
+    },
+    "ranking": {
+      "like": "ありがとう",
+      "thank": "いいね",
+      "token": "トーケン",
+      "time": "期間",
+      "display" : "件表示",
+      "emotion": "Emotion",
+      "name": "氏名",
+      "email": "email",
+      "received_amount": "受信量",
+      "rank": "順位"
+    },
+    "charts": {
+      "create_chart": "チャート作成",
+      "choose": "選択",
+      "time": "期間",
+      "name": "氏名",
+      "target": "対象",
+      "all": "すべて",
+      "like": "いいね",
+      "thank": "ありがとう",
+      "users_empty": "ユーザー名は空にしないでください",
+      "start_date_is_greater_than_end_date": "開始日が終了日より大きい"
+    }, 
+    "users" : {
+      "display": "件表示",
+      "delete": "削除",
+      "button_delete": "削除実行",
+      "name": "氏名",
+      "mail": "メールアドレス",
+      "deploy": "部署",
+      "edit": "修正",
+      "divison_name": "部署",
+      "email": "メールアドレス",
+      "delete_text": "以下のユーザを削除します。よろしいでしょうか。",
+      "delete_success": "ユーザの修正が完了しました。",
+      "edit_success": "ユーザの修正が完了しました。",
+      "register_success": "ユーザの登録が完了しました。",
+      "return_to_user_list":"ユーザー覧へ戻る",
+      "delete_cancel": "キャンセル",
+      "the_user_has_been_deleted": "ユーザの削除が完了しました。",
+      "submit": "確定",
+      "cancel": "キャンセル",
+      "The_email_has_already_been_taken": "電子メールは既に撮影されています"
+    },
+    "pagination": {
+      "First": "最初",
+      "Prev": "前",
+      "Next": "次",
+      "Last": "最終"
+    }
+  }
+}

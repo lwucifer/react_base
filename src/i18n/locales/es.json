@@ -1,0 +1,38 @@
+{
+  "translations": {
+    "title": "Edite src / App.js y guárdelo para volver a cargar.",
+    "text": "Aprender reaccionar",
+    "age": { "label": "Años" },
+    "home":  "Casa" ,
+    "name": { "label": "Nombre" },
+    "search": "Buscar",
+    "Email address": "Dirección de correo electrónico",
+    "Password": "la contraseña",
+    "Submit": "presentar",
+    "Users": "Users ES",
+    "Customers": "Customers ES",
+    "Index2": "index2",
+    "key1": "ES The first 4 letters of the english alphabet are: %s, %s, %s and %s",
+    "login": "ログアウト",
+    "validator": {
+      "required": "The {{attribute}} este campo es requerido."
+    },
+    "menu": {
+      "ranking": "ランキング",
+      "reception_amount": "受信量",
+      "number_receptions": "受信回数",
+      "price": "価値",
+      "transmission_amount": "送信量",
+      "number_transmissions": "送信回数",
+      "chart": "チャート",
+      "user": "ユーザ管理",
+      "list": "一覧",
+      "registration": "登録"
+    },
+    "ranking": {
+      "token": "トーケン",
+      "time": "期間",
+      "display" : "件表示"
+    }
+  }
+}

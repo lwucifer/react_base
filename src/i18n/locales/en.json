@@ -1,0 +1,90 @@
+{
+  "translations": {
+    "age": { "label": "my problem with no description" },
+    "home": "Home",
+    "name": { "label": "Name" },
+    "search": "Search",
+    "Email address": "Email address",
+    "Password": "Password",
+    "Submit": "Submit",
+    "Users": "Users",
+    "Customers": "Customers",
+    "validator": {
+      "required": "The {{attribute}} field is required.",
+      "email": "The {{attribute}} must be a valid email address.",
+      "min": "The {{attribute}} must be at least 6 characters." 
+    },
+    "login": {
+      "submit": "Submit",
+      "login": "Login",
+      "Email": "Email",
+      "Password": "Password",
+      "invalid_email_or_password": "Invalid email or password"
+    },
+    "menu": {
+      "ranking": "Ranking",
+      "reception_amount": "Reception amount",
+      "number_receptions": "Number of receptions",
+      "price": "Price",
+      "transmission_amount": "Transmission Amount",
+      "number_transmissions": "Number of transmissions",
+      "charts": "Charts",
+      "chart": "Transition",
+      "diagram": "Diagram",
+      "user": "Users",
+      "list": "List",
+      "registration": "Registration",
+      "logout": "Logout"
+    },
+    "ranking": {
+      "like": "Like",
+      "thank": "Thank",
+      "token": "Token",
+      "time": "Time",
+      "display" : "Display",
+      "emotion": "Emotion",
+      "name": "Name",
+      "email": "email",
+      "received_amount": "Received Amount",
+      "rank": "Rank"
+    },
+    "charts": {
+      "create_chart": "Create",
+      "choose": "Choose",
+      "time": "Time",
+      "name": "Name",
+      "target": "Target",
+      "all": "All",
+      "like": "Like",
+      "thank": "Thank",
+      "users_empty": "username must not be empty",
+      "start_date_is_greater_than_end_date": "start-date is greater than end-date"
+    }, 
+    "users" : {
+      "display": "Display",
+      "delete": "Delete",
+      "button_delete": "Delete",
+      "name": "Name",
+      "deploy": "Deploy",
+      "edit": "Edit",
+      "divison_name": "Divison Name",
+      "email": "Email",
+      "delete_text": "Delete the following user. Are you sure?",
+      "delete_success": "User deleted is complete.",
+      "edit_success": "User modification is complete.",
+      "register_success": "registration is complete.",
+      "return_to_user_list": "Return to user list",
+      "delete_cancel": "Cancel",
+      "the_user_has_been_deleted": "The Users has been deleted",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "The_email_has_already_been_taken": "The email has already been taken"
+    },
+    "pagination": {
+      "First": "First",
+      "Prev": "Prev",
+      "Next": "Next",
+      "Last": "Last"
+    }
+  }
+}
