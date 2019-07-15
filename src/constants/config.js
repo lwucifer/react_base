@@ -6,7 +6,7 @@ var domain = 'http://183.91.11.132/pvm_api/public/api/auth/';
 // export const URL_SOCKET = 'http://localhost:100/';
 // var domain = 'http://127.0.0.1:8000/api/auth/';
 // export const URL = 'http://smartkios.local/api';
-export const URL = 'http://167.179.117.197';
+export const URL = 'http://127.0.0.1:8000';
 export const USER_URL = domain + 'user';
 export const USERS_URL = domain + 'users';
 

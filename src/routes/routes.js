@@ -25,6 +25,10 @@ import Hook from '../components/Example/hooks';
 // 403
 import Forbidden from './../components/Element/Forbidden';
 
+// Example
+import Example from './../components/Example/index';
+import Spring from './../components/Luu/index';
+
 const routes = [
 	{
 		path: '/',
@@ -116,6 +120,16 @@ const routes = [
 		path: '/403',
 		exact: false,
 		main: ({match}) => <Forbidden match={match}/>
+	},
+	{
+		path: '/example',
+		exact: false,
+		main: ({match}) => <Example match={match}/>
+	},
+	{
+		path: '/luu',
+		exact: false,
+		main: ({match}) => <Spring match={match}/>
 	},
 	// Users
 	// {

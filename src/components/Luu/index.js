@@ -13,10 +13,11 @@ const DataTable = React.lazy(() => {
 });
 
 const renderLoader = () => <p>Loading</p>;
+
 class index extends Component {
     constructor(props) {
-		super(props);
-		this.state = {
+        super(props);
+        this.state = {
             pagination: Config.PAGINATION_CONFIG,
             rdbutton: '',
             chbox1: true,
@@ -26,23 +27,23 @@ class index extends Component {
             is_sort: true,
             is_delete: false
         };
-        document.title = "ユーザ一覧"
+        document.title = "Spring Luu"
     }
-    
+
     componentWillMount(){
-        this.props.setTitle('ユーザ一覧');
+        this.props.setTitle('Spring');
         if(isEmpty( this.props.customers )){
             this.getUsersData();
         }
     }
 
     componentWillReceiveProps(nextProps){
-       if(nextProps.users && nextProps.users.pagination){
+        if(nextProps.users && nextProps.users.pagination){
             this.setState({
                 page: nextProps.users.pagination.current_page,
                 totalRecord: nextProps.users.pagination.total
             });
-       }
+        }
     }
 
     onChangePage = (info, type) => {
@@ -62,8 +63,8 @@ class index extends Component {
         this.setState(prevState => ({
             pagination: {
                 ...prevState.pagination,
-                sortColumn: column, 
-                sortType: type 
+                sortColumn: column,
+                sortType: type
             }
         }), () => {
             this.getUsersData();
@@ -71,8 +72,8 @@ class index extends Component {
     }
 
     onChangeForm = (event) => {
-		var target = event.target;
-		var name = target.name;
+        var target = event.target;
+        var name = target.name;
         var value = target.type === 'checkbox'? target.checked:target.value;
         this.setState(prevState => ({
             pagination: {
@@ -123,53 +124,54 @@ class index extends Component {
         const { t } = window.lang;
         let { users } = this.props;
         return (
-                <div className="row">
-                    <div className="col-sm-12">
-                        <div className="form-group row">
-                            <div className="col-sm-1">
-                                <select className="form-control"  name="sltOption" onChange={this.onChangeLimit}>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                            </div>
-                            <label className="col-sm-2 col-form-label">{t("users.display")}</label>
-                            <div className="col-sm-7">
+            <div className="row">
+                <div className="col-sm-12">
+                    <div className="form-group row">
+                        <div className="col-sm-1">
+                            <select className="form-control"  name="sltOption" onChange={this.onChangeLimit}>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <label className="col-sm-2 col-form-label">{t("users.display")}</label>
+                        <div className="col-sm-7">
                             <button className="buttonWhite float-right" onClick={ this.handleDelete } >{t("users.delete")}</button>
-                            </div>
                         </div>
                     </div>
-                    <div className="col-sm-10">
-                        <React.Suspense fallback={renderLoader()}>
-                            <DataTable 
-                                titles={this.titles()}
-                                sortColumn={this.state.pagination.sortColumn} 
-                                sortType={this.state.pagination.sortType} 
-                                totalRecord={ this.props.totalRecord }
-                                pageSize={this.state.pagination.pageSize}
-                                currentPage={this.state.pagination.page}
-                                onSort={ this.onSort }
-                                is_sort={this.state.is_sort}
-                                onChangePage={this.onChangePage}
-                            >
-                                {users && users.list && users.list.map( (item, key) => {
-                                    return (
-                                        <tr key = {key} >
-                                            <td>{ item.username }</td>
-                                            <td>{ item.division_name }</td>
-                                            <td>{ item.email }</td>
-                                            <td> <Link to={`/user/edit/${item.id}`} > <img src={ require('../../../public/icon/pen.png') } className="penIcon" /> </Link> </td>
-                                            <td> <input type="checkbox" value={item.id} onChange={this.onChangeChbox} /> </td>
-                                        </tr>
-                                    )
-                                })}
-                            </DataTable>
-                        </React.Suspense>
-                    </div>
                 </div>
+                <div className="col-sm-10">
+                    <React.Suspense fallback={renderLoader()}>
+                        <DataTable
+                            titles={this.titles()}
+                            sortColumn={this.state.pagination.sortColumn}
+                            sortType={this.state.pagination.sortType}
+                            totalRecord={ this.props.totalRecord }
+                            pageSize={this.state.pagination.pageSize}
+                            currentPage={this.state.pagination.page}
+                            onSort={ this.onSort }
+                            is_sort={this.state.is_sort}
+                            onChangePage={this.onChangePage}
+                        >
+                            {users && users.list && users.list.map( (item, key) => {
+                                return (
+                                    <tr key = {key} >
+                                        <td>{ item.username }</td>
+                                        <td>{ item.division_name }</td>
+                                        <td>{ item.email }</td>
+                                        <td> <Link to={`/user/edit/${item.id}`} > <img src={ require('../../../public/icon/pen.png') } className="penIcon" /> </Link> </td>
+                                        <td> <input type="checkbox" value={item.id} onChange={this.onChangeChbox} /> </td>
+                                    </tr>
+                                )
+                            })}
+                        </DataTable>
+                    </React.Suspense>
+                </div>
+            </div>
         );
     }
+
     getUsersData = (meta = null) => {
         let params = {
             page: this.state.pagination.page,
@@ -188,7 +190,7 @@ class index extends Component {
             chbox1: this.state.chbox1,
             chbox2: this.state.chbox2
         }
-        
+
         this.getUsersData(params);
     }
 
@@ -249,24 +251,24 @@ const mapStateToProps = (state) => {
         total = state.users.users.pagination.total;
         page = state.users.users.pagination.current_page;
     }
-	return {
+    return {
         users: state.users.status ? state.users.users : [],
         totalRecord: total,
         page: page,
         is_delete: state.users.is_delete ? true : false,
-	};
+    };
 }
 const mapDispatchToProps = (dispatch, props) => {
-	return {
+    return {
         setTitle : (params) => {
             dispatch(setTitlePage(params));
         },
-		getUsers : (params) => {
+        getUsers : (params) => {
             dispatch(actFetchUsersRequest(params));
         },
         confirmDelete: (params) => {
             dispatch(confirmUserDelete(params));
         }
-	}
+    }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(index);
