@@ -1,33 +1,33 @@
 import React from 'react';
 // Ranking
-import Ranking from '../components/Ranking';
-import ReceptionAmount from '../components/Ranking/ReceptionAmount';
-import NumberReceptions from '../components/Ranking/NumberReceptions';
-import Price from '../components/Ranking/Price';
-import TransmissionAmount from '../components/Ranking/TransmissionAmount';
-import NumberTransmissions from '../components/Ranking/NumberTransmissions';
+import Ranking from '../components/Pages/Ranking';
+import ReceptionAmount from '../components/Pages/Ranking/ReceptionAmount';
+import NumberReceptions from '../components/Pages/Ranking/NumberReceptions';
+import Price from '../components/Pages/Ranking/Price';
+import TransmissionAmount from '../components/Pages/Ranking/TransmissionAmount';
+import NumberTransmissions from '../components/Pages/Ranking/NumberTransmissions';
 // Chart
-import Chart from '../components/Chart/';
-import Diagram from '../components/Chart/Diagram';
+import Chart from '../components/Pages/Chart/';
+import Diagram from '../components/Pages/Chart/Diagram';
 // User
-import User from '../components/User';
-import Registration from '../components/User/Registration';
-import ConfirmDelete from '../components/User/Delete';
-import Edit from '../components/User/Edit';
+import User from '../components/Pages/User';
+import Registration from '../components/Pages/User/Registration';
+import ConfirmDelete from '../components/Pages/User/Delete';
+import Edit from '../components/Pages/User/Edit';
 // import Add from '../components/Example/add';
 // import List from '../components/Example/list';
-import HomePage2 from '../components/Example/index2';
-import Validate from '../components/Example/validate';
-import Modal from '../components/Example/modal';
-import Hook from '../components/Example/hooks';
+import HomePage2 from '../components/Pages/Example/index2';
+import Validate from '../components/Pages/Example/validate';
+import Modal from '../components/Pages/Example/modal';
+import Hook from '../components/Pages/Example/hooks';
 // import UsersPage from './pages/Users/UsersPage';
 
 // 403
-import Forbidden from './../components/Element/Forbidden';
+import Forbidden from './../components/Elements/Forbidden';
 
 // Example
-import Example from './../components/Example/index';
-import Spring from './../components/Luu/index';
+import Example from '../components/Pages/Example/index';
+import Spring from './../components/Pages/Luu/index';
 
 const routes = [
 	{
@@ -131,7 +131,6 @@ const routes = [
 		exact: false,
 		main: ({match}) => <Spring match={match}/>
 	},
-	// Users
 	// {
 	// 	path: '/users',
 	// 	exact: true, // required

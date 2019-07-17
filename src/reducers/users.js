@@ -27,16 +27,15 @@ const users = (state = initialState, action) => {
             };
             return state;    
         case Types.UPDATE_USERS:
-            let {id} = action.user.user; 
-            let index = findIndex(state.users, { id: id });
+
+
+            let index = findIndex(state.users.list, { id: action.data.id });
+
             if (index !== -1) {
-                state.users[index] = action.user.user;
+                state.users.list[index] = action.data;
             }
-            state = {
-                status: action.user.status,
-                users: action.user
-            }
-            return {...state};    
+
+            return {...state};
         case Types.FETCH_USER:
             if(action.is_edit){
                 state = {

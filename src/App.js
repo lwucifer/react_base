@@ -6,8 +6,8 @@ import { Router } from 'react-router-dom';
 import './App.css';
 import './webarch.css';
 import { Routes } from './routes/PrivateRoute';
-import Header from './components/Element/Header';
-import Sidebar from './components/Element/Sidebar';
+import Header from './components/Elements/Header';
+import Sidebar from './components/Elements/Sidebar';
 import history from './_helpers/history';
 
 class App extends Component {

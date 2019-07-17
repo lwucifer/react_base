@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import routes from './routes';
-import Login from '../components/Login'
-import NotFound from './../components/Element/NotFound';
+import Login from '../components/Pages/Login'
+import NotFound from './../components/Elements/NotFound';
 export const Routes = () => (
     
         <Switch>
