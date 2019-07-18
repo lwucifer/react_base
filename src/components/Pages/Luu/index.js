@@ -30,9 +30,11 @@ class index extends Component {
             sltOption: '',
             checked: [],
             users: [],
+            message: null,
             inEditMode: [],
             is_sort: true,
-            is_delete: false
+            is_delete: false,
+            row: 0
         };
         document.title = "Spring Luu"
     }
@@ -45,6 +47,11 @@ class index extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        this.setState({
+            message: nextProps.users.message ? nextProps.users.message : []
+        }, () => {
+            this.showMessage();
+        });
 
         if (nextProps.users && nextProps.users.pagination) {
             this.setState({
@@ -53,11 +60,7 @@ class index extends Component {
                 totalRecord: nextProps.users.pagination.total
             });
         }
-
-
     }
-
-
 
     onChangePage = (info, type) => {
         if (type && type === 'changePage') {
@@ -110,22 +113,18 @@ class index extends Component {
     }
 
     onChangeChbox = (event) => {
-        var array = this.state.checked;
+        let data = this.state.checked;
+        let id = event.target.value;
         if (event.target.checked) {
-            if (array.indexOf(event.target.value) === -1) {
-                array.push(event.target.value);
-            }
+            data[id] = true;
         } else {
-            var index = array.indexOf(event.target.value);
-            if (index !== -1) {
-                array.splice(index, 1);
-            }
+            data[id] = false;
         }
-        this.setState({checked: array});
+        this.setState({checked: data});
     }
 
     changeEditMode = (event) => {
-        var data = this.state.inEditMode;
+        let data = this.state.inEditMode;
         let id = event.target.value;
         if (event.target.checked) {
             data[id] = true;
@@ -137,21 +136,61 @@ class index extends Component {
 
     saveInline = (event) => {
         let id = event.target.value;
+        this.setState({
+            row: id,
+            message: []
+        })
         let params = {
             id: id,
             username: $('#name_' + id).val(),
+            email: $('#email_' + id).val(),
             division_name: $('#division_name_' + id).val()
         };
         this.props.saveUser(params);
-        var data = this.state.inEditMode;
-        data[id] = false;
-        this.setState({inEditMode: data});
+    }
+
+    showMessage() {
+        let id = this.state.row;
+        if (!Array.isArray(this.state.message)) {
+            if (this.state.message.email) {
+                $('#email_' + id).addClass('border-red');
+                $('#error_' + id + ' #email_error').html(
+                    '<span class="alert-danger">' + this.state.message.email + '</span>');
+            } else {
+                $('#email_' + id).removeClass('border-red');
+                $('#error_' + id + ' #email_error').html('');
+            }
+            if (this.state.message.username) {
+                $('#name_' + id).addClass('border-red');
+                $('#error_' + id + ' #username_error').html(
+                    '<span class="alert-danger">' + this.state.message.username + '</span>');
+            } else {
+                $('#name_' + id).removeClass('border-red');
+                $('#error_' + id + ' #username_error').html('');
+            }
+            if (this.state.message.division_name) {
+                $('#division_name_' + id).addClass('border-red');
+                $('#error_' + id + ' #division_name_error').html(
+                    '<span class="alert-danger">' + this.state.message.division_name + '</span>');
+            } else {
+                $('#division_name_' + id).removeClass('border-red');
+                $('#error_' + id + ' #division_name_error').html('');
+            }
+        }
+        else{
+            let data = this.state.inEditMode;
+            data[id] = false;
+            this.setState({
+                inEditMode: data,
+                message: this.props.users.message
+            });
+        }
     }
 
     handleDelete = () => {
         if (this.state.checked && !isEmpty(this.state.checked)) {
             let params = {
-                ids: this.state.checked
+                ids: Object.keys(this.state.checked)
             }
             this.props.confirmDelete(params);
         }
@@ -159,7 +198,7 @@ class index extends Component {
 
     render() {
         const {t} = window.lang;
-        let users = this.state.users;
+        let {users} = this.state;
         return (
             <div className="border">
                 <div className="row">
@@ -178,7 +217,7 @@ class index extends Component {
                         <div className="table-title">
                             <h5>基礎データ更新入力</h5>
                         </div>
-                        <form className="row m-3 align-items-center form-inline form-cus border">
+                        <form className="row m-3 mb-0 align-items-center form-inline form-cus border">
                             <table className="table table-bordered col-sm-6 p-0 mb-0">
                                 <tbody>
                                 <tr>
@@ -295,8 +334,9 @@ class index extends Component {
                         </form>
                     </div>
                     <div className="col-sm-12">
-                        <div className="p-3">
+                        <div className="p-3 pt-0">
                             <React.Suspense fallback={renderLoader()}>
+                                <button type="button" className="btn pull-right" onClick={this.handleDelete}>delete</button>
                                 <DataTable
                                     titles={this.titles()}
                                     sortColumn={this.state.pagination.sortColumn}
@@ -311,23 +351,19 @@ class index extends Component {
                                     {users && users.list && users.list.map((item, key) => {
                                         return (
                                             this.state.inEditMode[item.id] ?
-                                                <RederEditView key={item.id} keyProp={item.id} item={item}
+                                                <RederEditView key={item.id} item={item}
                                                                onCheck={this.onChangeChbox}
                                                                onSave={this.saveInline}
+                                                               checked={this.state.checked[item.id]}
                                                                onEdit={this.changeEditMode}/>
-                                            : <RederDefaultView key={item.id} keyProp={item.id} item={item}
+                                            : <RederDefaultView key={item.id} item={item}
                                                                 onCheck={this.onChangeChbox}
+                                                                checked={this.state.checked[item.id]}
                                                                 onEdit={this.changeEditMode}/>
                                         )
                                     })}
                                 </DataTable>
                             </React.Suspense>
-                            <div className="danger">
-                                <div className="alert-danger">error 666</div>
-                                <div className="alert-danger">error 777</div>
-                                <div className="alert-danger">error 888</div>
-                                <div className="alert-danger">error 999</div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -378,6 +414,11 @@ class index extends Component {
     titles = () => {
         const {t} = window.lang;
         return {
+            inline: {
+                name: t("users.inline"),
+                sortBy: "",
+                class: "c7"
+            },
             id: {
                 name: t("users.name"),
                 sortBy: "users.username",
@@ -402,12 +443,8 @@ class index extends Component {
                 name: t("users.delete"),
                 sortBy: "",
                 class: "c7"
-            },
-            inline: {
-                name: t("users.inline"),
-                sortBy: "",
-                class: "c7"
             }
+
         }
     }
 }
@@ -415,33 +452,38 @@ class index extends Component {
 function RederDefaultView(props) {
     return (
         <tr>
+            <td><input type="checkbox" defaultValue={props.item.id} onChange={props.onEdit}/></td>
+            <td><input type="text" disabled value={props.item.username} className="form-control"/></td>
+            <td><input type="text" disabled value={props.item.division_name} className="form-control"/></td>
+            <td><input type="text" disabled value={props.item.email} className="form-control"/></td>
+            <td><Link to={`/user/edit/${props.item.id}`}>edit</Link></td>
             <td>
-                <input type="checkbox" defaultValue={props.item.id} onChange={props.onEdit}/>
-            </td>
-            <td><input type="text" disabled defaultValue={props.item.username} className="form-control"/></td>
-            <td>{props.item.division_name}</td>
-            <td>{props.item.email}</td>
-            <td><Link to={`/user/edit/${props.item.id}`}><img src="" className="penIcon"/></Link></td>
-            <td>
-                <input type="checkbox" value={props.item.id} onChange={props.onCheck}/>
+                <input type="checkbox" defaultChecked={props.checked} value={props.item.id} onChange={props.onCheck}/>
             </td>
         </tr>
     );
 }
 function RederEditView(props) {
     return (
-        <tr>
+        <tr id={'error_' + props.item.id}>
             <td>
                 <input type="checkbox" checked defaultValue={props.item.id} onChange={props.onEdit}/>
                 <button type="button" onClick={props.onSave} value={props.item.id} className="btn btn-primary ml-3">save</button>
             </td>
-            <td><input type="text" defaultValue={props.item.username} name="name" id={'name_' + props.item.id} className="form-control"/></td>
-            <td><input type="text" defaultValue={props.item.division_name} name="division" id={'division_name_' + props.item.id} className="form-control"/></td>
-            <td><input type="text" defaultValue={props.item.email} name="email" id={'email_' + props.item.id} className="form-control"/></td>
-            <td><Link to={`/user/edit/${props.item.id}`}><img src="" className="penIcon"/></Link></td>
             <td>
-                <input type="checkbox" value={props.item.id} onChange={props.onCheck}/>
+                <input type="text" defaultValue={props.item.username} name="name" id={'name_' + props.item.id} className="form-control"/>
+                <div id="username_error"></div>
             </td>
+            <td>
+                <input type="text" defaultValue={props.item.division_name} name="division" id={'division_name_' + props.item.id} className="form-control"/>
+                <div id="division_name_error"></div>
+            </td>
+            <td>
+                <input type="text" defaultValue={props.item.email} name="email" id={'email_' + props.item.id} className="form-control"/>
+                <div id="email_error"></div>
+            </td>
+            <td><Link to={`/user/edit/${props.item.id}`}>edit</Link></td>
+            <td><input type="checkbox" defaultChecked={props.checked} value={props.item.id} onChange={props.onCheck}/></td>
         </tr>
     );
 }
@@ -453,12 +495,12 @@ const mapStateToProps = (state) => {
         total = state.users.users.pagination.total;
         page = state.users.users.pagination.current_page;
     }
-
     return {
         users: state.users.users,
         totalRecord: total,
         page: page,
         is_delete: state.users.is_delete ? true : false,
+        message: state.users.message ? state.users.message : []
     };
 }
 const mapDispatchToProps = (dispatch, props) => {

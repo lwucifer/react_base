@@ -7,7 +7,7 @@ const users = (state = initialState, action) => {
         case Types.FETCH_USERS:
             state = {
                 status: true,
-                users: action.res.response.data
+                users: action.res.response.data,
             }
             return {...state};
         case Types.DELETE_USERS:
@@ -17,8 +17,7 @@ const users = (state = initialState, action) => {
             return {...state};    
         case Types.ADD_USERS:
             let profile = state.profile;
-            console.log(action);
-            state = { 
+            state = {
                 status: true,
                 is_add: (action.is_add) ? true : false,
                 users: action.params,
@@ -27,15 +26,28 @@ const users = (state = initialState, action) => {
             };
             return state;    
         case Types.UPDATE_USERS:
-
-
-            let index = findIndex(state.users.list, { id: action.data.id });
-
-            if (index !== -1) {
-                state.users.list[index] = action.data;
+            if(action.is_edit){
+                let index = findIndex(state.users.list, { id: action.data.data.id });
+                if (index !== -1) {
+                    state.users.list[index] = action.data.data;
+                }
+                state.users.message = [];
+                state = {
+                    status: true,
+                    is_edit: true,
+                    users: state.users,
+                    message: []
+                }
+            } else {
+                state.users.message = action.data.status.message;
+                state = {
+                    status: true,
+                    is_edit: false,
+                    users: state.users,
+                    message: action.data.status.message
+                }
             }
-
-            return {...state};
+            return state;
         case Types.FETCH_USER:
             if(action.is_edit){
                 state = {

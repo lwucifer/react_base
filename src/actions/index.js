@@ -229,7 +229,7 @@ export const actGetEditUserData = (id) => {
 export const actEditUserRequest = (params) => {
     return (dispatch) => {
         rf.getRequest('AdminRequest').editUser(params.id, params).then(res => {
-            let data = res.response.data;
+            let data = res.response;
             dispatch({
                 type: Types.UPDATE_USERS,
                 is_edit: res.response.status.message === "success" ? true : false ,
