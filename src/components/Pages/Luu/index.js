@@ -36,7 +36,7 @@ class index extends Component {
             is_delete: false,
             row: 0
         };
-        document.title = "Spring Luu"
+        document.title = "Nguyen Luu"
     }
 
     componentWillMount() {
@@ -137,8 +137,7 @@ class index extends Component {
     saveInline = (event) => {
         let id = event.target.value;
         this.setState({
-            row: id,
-            message: []
+            row: id
         })
         let params = {
             id: id,
@@ -154,35 +153,34 @@ class index extends Component {
         if (!Array.isArray(this.state.message)) {
             if (this.state.message.email) {
                 $('#email_' + id).addClass('border-red');
-                $('#error_' + id + ' #email_error').html(
+                $('#row_' + id + ' #email_error').html(
                     '<span class="alert-danger">' + this.state.message.email + '</span>');
             } else {
                 $('#email_' + id).removeClass('border-red');
-                $('#error_' + id + ' #email_error').html('');
+                $('#row_' + id + ' #email_error').html('');
             }
             if (this.state.message.username) {
                 $('#name_' + id).addClass('border-red');
-                $('#error_' + id + ' #username_error').html(
+                $('#row_' + id + ' #username_error').html(
                     '<span class="alert-danger">' + this.state.message.username + '</span>');
             } else {
                 $('#name_' + id).removeClass('border-red');
-                $('#error_' + id + ' #username_error').html('');
+                $('#row_' + id + ' #username_error').html('');
             }
             if (this.state.message.division_name) {
                 $('#division_name_' + id).addClass('border-red');
-                $('#error_' + id + ' #division_name_error').html(
+                $('#row_' + id + ' #division_name_error').html(
                     '<span class="alert-danger">' + this.state.message.division_name + '</span>');
             } else {
                 $('#division_name_' + id).removeClass('border-red');
-                $('#error_' + id + ' #division_name_error').html('');
+                $('#row_' + id + ' #division_name_error').html('');
             }
         }
         else{
             let data = this.state.inEditMode;
             data[id] = false;
             this.setState({
-                inEditMode: data,
-                message: this.props.users.message
+                inEditMode: data
             });
         }
     }
@@ -194,6 +192,10 @@ class index extends Component {
             }
             this.props.confirmDelete(params);
         }
+    }
+
+    onChangeText = (event) => {
+        $('#' + event.target.id).removeClass('border-red').parent().children('.mess').html('');
     }
 
     render() {
@@ -351,12 +353,13 @@ class index extends Component {
                                     {users && users.list && users.list.map((item, key) => {
                                         return (
                                             this.state.inEditMode[item.id] ?
-                                                <RederEditView key={item.id} item={item}
+                                                <RenderEditView key={item.id} item={item}
                                                                onCheck={this.onChangeChbox}
+                                                               onPress={this.onChangeText}
                                                                onSave={this.saveInline}
                                                                checked={this.state.checked[item.id]}
                                                                onEdit={this.changeEditMode}/>
-                                            : <RederDefaultView key={item.id} item={item}
+                                            : <RenderDefaultView key={item.id} item={item}
                                                                 onCheck={this.onChangeChbox}
                                                                 checked={this.state.checked[item.id]}
                                                                 onEdit={this.changeEditMode}/>
@@ -449,7 +452,7 @@ class index extends Component {
     }
 }
 
-function RederDefaultView(props) {
+function RenderDefaultView(props) {
     return (
         <tr>
             <td><input type="checkbox" defaultValue={props.item.id} onChange={props.onEdit}/></td>
@@ -463,24 +466,24 @@ function RederDefaultView(props) {
         </tr>
     );
 }
-function RederEditView(props) {
+function RenderEditView(props) {
     return (
-        <tr id={'error_' + props.item.id}>
+        <tr id={'row_' + props.item.id}>
             <td>
                 <input type="checkbox" checked defaultValue={props.item.id} onChange={props.onEdit}/>
                 <button type="button" onClick={props.onSave} value={props.item.id} className="btn btn-primary ml-3">save</button>
             </td>
             <td>
                 <input type="text" defaultValue={props.item.username} name="name" id={'name_' + props.item.id} className="form-control"/>
-                <div id="username_error"></div>
+                <div id="username_error" className="mess"></div>
             </td>
             <td>
                 <input type="text" defaultValue={props.item.division_name} name="division" id={'division_name_' + props.item.id} className="form-control"/>
-                <div id="division_name_error"></div>
+                <div id="division_name_error" className="mess"></div>
             </td>
             <td>
-                <input type="text" defaultValue={props.item.email} name="email" id={'email_' + props.item.id} className="form-control"/>
-                <div id="email_error"></div>
+                <input type="text" defaultValue={props.item.email} name="email" id={'email_' + props.item.id} className="form-control" onChange={props.onPress}/>
+                <div id="email_error" className="mess"></div>
             </td>
             <td><Link to={`/user/edit/${props.item.id}`}>edit</Link></td>
             <td><input type="checkbox" defaultChecked={props.checked} value={props.item.id} onChange={props.onCheck}/></td>
