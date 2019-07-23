@@ -94,6 +94,20 @@ const menu = [
 				icon: 'card_giftcard',
 			}
 		]
+	},
+	{
+		name: 'menu.master',
+		to: '/master/',
+		exact: false,
+        icon: require('../../../public/icon/man.png'),
+        children: [
+			{
+				name: 'menu.list',
+				to: '/master/',
+				exact: false,
+				icon: 'card_giftcard',
+			}
+		]
 	}
 	// {
 	// 	name: 'Validate',

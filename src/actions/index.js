@@ -226,12 +226,25 @@ export const actGetEditUserData = (id) => {
         })
     }
 }
-export const actEditUserRequest = (params) => {
+export const actEditUserInlineRequest = (params) => {
     return (dispatch) => {
         rf.getRequest('AdminRequest').editUser(params.id, params).then(res => {
             let data = res.response;
             dispatch({
                 type: Types.UPDATE_USERS,
+                is_edit: res.response.status.message === "success" ? true : false ,
+                data
+            });
+        })
+    }
+}
+
+export const actEditUserRequest = (params) => {
+    return (dispatch) => {
+        rf.getRequest('AdminRequest').editUser(params.id, params).then(res => {
+            let data = res.response;
+            dispatch({
+                type: Types.UPDATE_USER,
                 is_edit: res.response.status.message === "success" ? true : false ,
                 data
             });
@@ -245,7 +258,7 @@ export const confirmUserDelete = (params) => {
             type: Types.CONFIRM_DELETE_USERS,
             params
         });
-        history.push('/user/delete') 
+        history.push('/mas/delete')
     }
 }
 

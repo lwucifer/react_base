@@ -25,7 +25,6 @@ const store = createStore(
     composeEnhancer(applyMiddleware(thunk, loggingMiddleware))
 );
 
-
 ReactDOM.render(
     <Provider store={ store }>
         <I18nextProvider i18n={i18n}>

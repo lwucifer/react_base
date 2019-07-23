@@ -6,12 +6,7 @@ import {merge, isEmpty} from 'lodash';
 import $ from 'jquery';
 
 // import file
-import {
-    actEditUserInlineRequest,
-    actFetchUsersRequest,
-    confirmUserDelete,
-    setTitlePage
-} from '../../../actions/index'
+import {actEditUserInlineRequest, actFetchUsersRequest, confirmUserDelete, setTitlePage} from '../../../actions/index'
 import {faSort} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons/faSearch";
@@ -53,11 +48,13 @@ class index extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            message: nextProps.users.message ? nextProps.users.message : [],
-        }, () => {
-            this.showMessage();
-        });
+        if (nextProps.users) {
+            this.setState({
+                message: nextProps.users.message ? nextProps.users.message : [],
+            }, () => {
+                this.showMessage();
+            });
+        }
 
         if (nextProps.users && nextProps.users.pagination) {
             this.setState({
@@ -233,7 +230,7 @@ class index extends Component {
             <div className="border">
                 <div className="row">
                     <div className="col-sm-12">
-                        <div className="border-bottom pt-3 pb-3">
+                        <div className="border-bottom pt-3 pb-3 page-title">
                             <h3>画面イメージ</h3>
                         </div>
                         <div className="d-flex align-items-center col border-bottom pt-2 pb-2">
@@ -247,133 +244,11 @@ class index extends Component {
                         <div className="table-title">
                             <h5>基礎データ更新入力</h5>
                         </div>
-                        <form className="row m-3 mb-0 align-items-center form-inline form-cus border">
-                            <table className="table table-bordered col-sm-6 p-0 mb-0">
-                                <tbody>
-                                <tr>
-                                    <th>区分</th>
-                                    <td>
-                                        <input id="radio1" type="radio" name="radio" value="1" className="form-control border-0 ml-3 mr-2"/>
-                                        <span htmlFor="radio1">区分</span>
-                                        <input id="radio2" type="radio" name="radio" value="2" className="form-control border-0 ml-4 mr-2"/>
-                                        <span htmlFor="radio2">区分</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="form-search">
-                                        <input type="text" name="" className="form-control"/>
-                                        <button className="form-control"><FontAwesomeIcon icon={faSearch}/></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="form-search">
-                                        <input type="text" name="" className="form-control"/>
-                                        <button className="form-control"><FontAwesomeIcon icon={faSearch}/></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="form-search">
-                                        <input type="text" name="" className="form-control"/>
-                                        <button className="form-control"><FontAwesomeIcon icon={faSearch}/></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="double-form">
-                                        <input type="text" name="" className="form-control"/>
-                                        <span className="m-1">~</span>
-                                        <input type="text" name="" className="form-control"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="double-form">
-                                        <input type="text" name="" className="form-control"/>
-                                        <span className="m-1">~</span>
-                                        <input type="text" name="" className="form-control"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="double-form">
-                                        <input type="text" name="" className="form-control"/>
-                                        <span className="m-1">~</span>
-                                        <input type="text" name="" className="form-control"/>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <table className="table table-bordered col-sm-4 p-0 mb-0">
-                                <tbody>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="form-search">
-                                        <input type="text" name="" className="form-control"/>
-                                        <button className="form-control"><FontAwesomeIcon icon={faSearch}/></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="form-search">
-                                        <input type="text" name="" className="form-control"/>
-                                        <button className="form-control"><FontAwesomeIcon icon={faSearch}/></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="form-search">
-                                        <input type="text" name="" className="form-control"/>
-                                        <button className="form-control"><FontAwesomeIcon icon={faSearch}/></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td>
-                                        <input type="text" name="" className="form-control"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="double-form">
-                                        <input type="text" name="" className="form-control"/>
-                                        <span className="m-1">~</span>
-                                        <input type="text" name="" className="form-control"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>区分</th>
-                                    <td className="form-search">
-                                        <input type="text" name="" className="form-control"/>
-                                        <button className="form-control"><FontAwesomeIcon icon={faSearch}/></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th className="background-none border-right-0"></th>
-                                    <td className="border-left-0">
-                                        <span className="form-control hidden"/>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div className="col-sm-2 p-0">
-                                <button className="btn btn-primary" type="submit">検索</button>
-                            </div>
-                        </form>
                     </div>
                     <div className="col-sm-12">
                         <div className="p-3 pt-0">
                             <React.Suspense fallback={renderLoader()}>
-                                <button type="button" className="btn btn-primary pull-left" onClick={this.saveAll}>save all</button>
-                                <select className="btn btn-light"  name="sltOption" onChange={this.onChangeLimit}>
-                                    <option value="1">1</option>
-                                    <option value="3">3</option>
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                </select>
-                                <button type="button" className="btn pull-right" onClick={this.handleDelete}>delete</button>
+                                <Link to={'/mas/add'} className="btn btn-primary pull-right">新規作成</Link>
                                 <DataTable
                                     titles={this.titles()}
                                     sortColumn={this.state.pagination.sortColumn}
@@ -452,37 +327,21 @@ class index extends Component {
     titles = () => {
         const {t} = window.lang;
         return {
-            inline: {
-                name: t("users.inline"),
-                sortBy: "",
-                class: "c7"
-            },
             id: {
-                name: t("users.name"),
-                sortBy: "users.username",
+                name: "部署コード",
+                sortBy: "users.id",
                 class: "c1"
             },
             name: {
-                name: t("users.divison_name"),
-                sortBy: "users.division_name",
-                class: "c3"
+                name: "部署名",
+                sortBy: "users.username",
+                class: "c1"
             },
-            is_active: {
-                name: t("users.email"),
+            email: {
+                name: "システム管理者権限",
                 sortBy: "users.email",
-                class: "c5"
+                class: "c1"
             },
-            created_at: {
-                name: t("users.edit"),
-                sortBy: "",
-                class: ""
-            },
-            created_at2: {
-                name: t("users.delete"),
-                sortBy: "",
-                class: "c7"
-            }
-
         }
     }
 }
@@ -490,14 +349,9 @@ class index extends Component {
 function RenderDefaultView(props) {
     return (
         <tr>
-            <td><input type="checkbox" defaultValue={props.item.id} onChange={props.onEdit}/></td>
-            <td><input type="text" disabled value={props.item.username} className="form-control"/></td>
-            <td><input type="text" disabled value={props.item.division_name} className="form-control"/></td>
-            <td><input type="text" disabled value={props.item.email} className="form-control"/></td>
-            <td><Link to={`/user/edit/${props.item.id}`}>edit</Link></td>
-            <td>
-                <input type="checkbox" defaultChecked={props.checked} value={props.item.id} onChange={props.onCheck}/>
-            </td>
+            <td><Link to={`/mas/edit/${props.item.id}`}>{props.item.id}</Link></td>
+            <td>{props.item.username}</td>
+            <td>{props.item.email}</td>
         </tr>
     );
 }

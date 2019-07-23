@@ -29,6 +29,12 @@ import Forbidden from './../components/Elements/Forbidden';
 import Example from '../components/Pages/Example/index';
 import Spring from './../components/Pages/Luu/index';
 
+// Master
+import Master from './../components/Pages/Master/index';
+import MasterAdd from './../components/Pages/Master/Add';
+import MasterEdit from './../components/Pages/Master/Edit';
+import MasterDelete from './../components/Pages/Master/Delete';
+
 const routes = [
 	{
 		path: '/',
@@ -131,11 +137,26 @@ const routes = [
 		exact: false,
 		main: ({match}) => <Spring match={match}/>
 	},
-	// {
-	// 	path: '/users',
-	// 	exact: true, // required
-	// 	main: ({match, location, history}) => <UsersPage match={match} location={location} history={history}/>
-	// },
+	{
+		path: '/master',
+		exact: false,
+		main: ({match, location, history}) => <Master match={match} history={history} location={location}/>
+	},
+	{
+		path: '/mas/add',
+		exact: false,
+		main: ({match, location, history}) => <MasterAdd match={match} history={history} location={location}/>
+	},
+	{
+		path: '/mas/edit/:id',
+		exact: false,
+		main: ({match, location, history}) => <MasterEdit match={match} history={history} location={location}/>
+	},
+    {
+		path: '/mas/delete',
+		exact: false,
+		main: ({match, location, history}) => <MasterDelete match={match} history={history} location={location}/>
+	},
 ];
 
 export default routes;

@@ -22,7 +22,7 @@ const users = (state = initialState, action) => {
                 is_add: (action.is_add) ? true : false,
                 users: action.params,
                 profile: profile,
-                message: "The_email_has_already_been_taken"
+                message: action.res.response.status.message
             };
             return state;    
         case Types.UPDATE_USERS:
@@ -48,6 +48,21 @@ const users = (state = initialState, action) => {
                 }
             }
             return state;
+        case Types.UPDATE_USER:
+            if(action.is_edit){
+                state = {
+                    status: true,
+                    is_edit: true,
+                    message: []
+                }
+            } else {
+                state = {
+                    status: true,
+                    is_edit: false,
+                    message: action.data.status.message
+                }
+            }
+            return state;
         case Types.FETCH_USER:
             if(action.is_edit){
                 state = {
@@ -66,21 +81,29 @@ const users = (state = initialState, action) => {
         case Types.GET_USER: 
             if (action.user){
                 state = {
-                    userEdit: action.user
+                    userEdit: action.user,
+                    message: []
                 }
             }
             return {...state};    
-        case Types.CONFIRM_DELETE_USERS: 
-            var arr = [];
-            action.params.ids.map((id, key) => {
-                let index = findIndex(state.users.list, { id: parseInt(id) });
-                arr.push(state.users.list[index])
-            })
-            if (arr){
+        case Types.CONFIRM_DELETE_USERS:
+            if (state.users) {
+                var arr = [];
+                action.params.ids.map((id, key) => {
+                    let index = findIndex(state.users.list, {id: parseInt(id)});
+                    arr.push(state.users.list[index])
+                })
+                if (arr) {
+                    state = {
+                        ids: action.params.ids,
+                        is_delete: false,
+                        user: arr
+                    }
+                }
+            } else {
                 state = {
                     ids: action.params.ids,
                     is_delete: false,
-                    user: arr
                 }
             }
             return {...state};

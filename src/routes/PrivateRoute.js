@@ -22,7 +22,7 @@ const PublicRouter = (Login) => {
 }
 
 const PrivateRouter = (routes) => {
-    var result = null;
+    let result = null;
     if(routes.length > 0){
         result = routes.map((route, index) => {
             return (
